@@ -13,7 +13,7 @@ ROLES = (
 class CustomUser(AbstractUser):
     pass
     # add additional fields in here
-    avatar = models.ImageField(default='unnamed.jpg')
+    avatar = models.ImageField(default='unnamed.jpg', upload_to='images/')
     phone_number = models.CharField(max_length=15 ,null=True, blank=True)
     birth_date  = models.DateField(auto_now=True)
     role = models.CharField(max_length=15, choices=ROLES, null=False, blank=False)

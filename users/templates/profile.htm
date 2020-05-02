@@ -9,14 +9,35 @@
 </head>
 <body>
     <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>  
+    <div class="container">
         <h5>
-             {{ user }}
+             {{ user.username }}
         </h5>
-
+        <h5>
+            {{ user.email }}
+        </h5>
+        <h5>
+            {{ user.avatar }}
+        </h5>
+        <h5>
+            {{ user.phone_number }}
+        </h5>
+        <h5>
+            {{ user.role }}
+        </h5>
     </div>
     <div class="container">
         <img src="{{ user.avatar.url }}" alt="" srcset="">
     </div>
+    <a href="{% url 'logout' %}">logout</a>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
 		integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
         crossorigin="anonymous">

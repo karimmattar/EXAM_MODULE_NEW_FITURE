@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import CustomUser
 from .forms import CustomUserCreationForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 
 def register(request):
     if request.method == 'POST':
@@ -11,7 +12,7 @@ def register(request):
             new_user.set_password(form.cleaned_data['password1'])
             new_user.save()
             messages.success(
-               request, 'congratulation {} you have registerated successfully.'.format(username))
+               request, 'congratulation {} you have registerated successfully.'.format(new_user))
             # messages.success(
             #     request, f'done {new_user} you can now login')
             return redirect('login')
@@ -40,9 +41,14 @@ def login_user(request):
         'form' : form,
     })
 
+def logout_user(request):
+    logout(request)
+    messages.success(
+                request, 'Successfully loged out')
+    return redirect('login')
+
 def profile(request):
     user = request.user
-    user1 = CustomUser.objects.get(username=user)
     return render(request, 'profile.htm', {
-        'user' : user1
+        'user' : user,
     })
