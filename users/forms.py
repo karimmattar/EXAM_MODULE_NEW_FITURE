@@ -34,7 +34,8 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'first_name',
+                  'last_name', 'avatar', 'phone_number', 'role',)
 
 class LoginForm(forms.ModelForm):
     username = forms.CharField(label='Usename or Email')
@@ -43,4 +44,4 @@ class LoginForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password')
+        fields = ('username', 'password',)
