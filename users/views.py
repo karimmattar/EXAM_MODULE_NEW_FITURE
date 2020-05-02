@@ -49,6 +49,25 @@ def logout_user(request):
 
 def profile(request):
     user = request.user
+    if user.role == 'teacher':
+        return redirect('teacher_profile', user.id)
+    elif user.role == 'student':
+        return redirect('error_404')
+    elif user.role == 'parent':
+        return redirect('error_404')
+    elif user.role == 'headMaster':
+        return redirect('error_404')
+    else:
+        return redirect('error_404')
+
+def error_404(request):
+    logout(request)
+    return render(request, 'error_404.htm', {
+        'title' : 'error not found',
+    })
+
+def teacher_profile(request, id):
+    user = CustomUser.objects.get(pk=id)
     return render(request, 'profile.htm', {
         'user' : user,
     })
